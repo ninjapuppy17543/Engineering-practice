@@ -1,27 +1,32 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.xlim(-5, 5)
-plt.ylim(-5, 5)
+plt.xlim(-5, 5) # Setting the x-axis limit in the represented graph
+plt.ylim(-5, 5) # Doing the same for y-axis
 
-plt.axhline(y=0, zorder=0, color="black", alpha=0.3)
+plt.axhline(y=0, zorder=0, color="black", alpha=0.3) # Highlighting y=0 and x=0
 plt.axvline(x=0, zorder=0, color="black", alpha=0.3)
 
-xpos = 0
-ypos = 0
-u = 3
-v = 1
+# These values are for the vector
+xpos = 0 # X position
+ypos = 0 # Y position
+u = 3 # How far along the x-axis
+v = 1 # How far along the y-axis
 
+# This just makes the grid
 plt.grid(linewidth=2,
          color="lightgray",
          alpha=0.2,
          zorder=0)
 
+# Makes the points you see
 plt.scatter(3, 1)
 plt.scatter(0, 0)
 
+#Draws the vector. Angle and scale units have to be included so that the vector is accuratley represented acccoreding to the axis
 plt.quiver(xpos, ypos, u, v, color="darkred", scale=1, angles="xy", scale_units="xy")
 
+# The graph only shows integers between -5 to 6, no floats
 plt.xticks(range(-5, 6))
 plt.yticks(range(-5, 6))
 
