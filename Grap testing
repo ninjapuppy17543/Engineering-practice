@@ -1,0 +1,42 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.array([2023, 2024, 2025, 2026])
+y1 = np.array([15, 25, 30, 20])
+y2 = np.array([21, 17, 28, 7])
+y3 = np.array([34, 27, 29, 21])
+
+plt.title("Class size", fontsize=20,
+                        family="Arial",
+                        fontweight="bold",
+                        color="black")
+
+plt.xlabel("Year", fontsize="20",
+                    fontfamily="Arial",
+                    fontweight="bold",
+                    color="black")
+
+plt.ylabel("Students", fontsize="20",
+                    fontfamily="Arial",
+                    fontweight="bold",
+                    color="black")
+
+list_styles = dict(marker=".",
+                   markersize="10",
+                   markerfacecolor="red",
+                   markeredgecolor="black",
+                   linestyle="solid",
+                   linewidth="1")
+
+plt.tick_params(axis="both",
+                colors="black")
+
+plt.plot(x, y1, color="blue", **list_styles)
+plt.plot(x, y2, color="black", **list_styles)
+plt.plot(x, y3, color="green", **list_styles)
+
+plt.xticks(x)
+
+plt.show()
+
+
