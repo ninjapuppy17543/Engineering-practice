@@ -1,0 +1,54 @@
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+import numpy as np
+
+m = 1 # kg
+k = 1 # N/m
+d = 0.2 # Unit of d
+
+t = np.linspace(0, 40, 501)
+w_d = np.sqrt((4*m*k - d**2)/(4*m**2))
+x = np.exp(-d/(2*m) * t) * np.cos(w_d * t)
+
+fig, axis = plt.subplots(1, 2)
+
+animated_spring, = axis[0].plot([], [], color="blue") # ',' is used because axis.plot returns an array
+animated_mass, = axis[0].plot([], [], "o", markersize=20, color="red") # ',' is used because axis.plot returns an array
+
+
+axis[0].set_xlim([-2, 2])
+axis[0].set_ylim([-2, 2])
+axis[0].set_title("Spring")
+axis[0].grid()
+
+animated_disp, = axis[1].plot([], [], color="red")
+
+axis[1].set_xlim([min(t), max(t)])
+axis[1].set_ylim([-2, 2])
+axis[1].set_title("Spring motion")
+axis[1].grid()
+
+# Defining our update function
+
+def update(frame):
+    animated_mass.set_data([x[frame]], [0])
+    animated_spring.set_data([-2, x[frame]], [0, 0])
+
+    animated_spring.set_linewidth(int(abs(x[frame]-2)*2))
+
+    animated_disp.set_data(t[:frame], x[:frame])
+
+    return animated_spring, animated_mass, animated_disp
+
+animation = FuncAnimation(fig=fig, func=update, frames=len(t), interval=20, blit=True) 
+
+# 40 seconds (anim length) / 500 intervals = 0.08 seconds, 
+# which means that interval=80 would reproduce the animation in realtime, though itll be in 12,5FPS.
+# interval=20 would be 4x speed (80/20 = 4)
+
+# blit = True means it only redraws the function mentioned. In this case it's just the dot.
+# if blit = Fals, matplotlib redraws everything every frame, making everything slower
+
+#animation.save("basic_spring_animation.gif")
+
+plt.show()
